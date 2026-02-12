@@ -1,0 +1,1233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Align Tech • Align Tech Intake</title>
+  <meta name="description" content="A Tesla-inspired, minimal, premium intake form for corporate branding and web projects."/>
+
+  <!-- Fonts (Tesla-like: clean sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(255,255,255,.08);
+      --border:rgba(255,255,255,.14);
+      --text:#e8eef6;
+      --muted:rgba(232,238,246,.72);
+      --muted2:rgba(232,238,246,.55);
+      --accent:#ffffff;
+      --accent2:#7C3AED;
+      --accent3:#06B6D4;
+      --accent4:#F97316;
+      --good:#22c55e;
+      --warn:#f59e0b;
+      --bad:#ef4444;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1160px;
+      --ease: cubic-bezier(.2,.8,.2,1);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: 'Space Grotesk', Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 700px at 80% -10%, rgba(124,58,237,.24), transparent 60%),
+                  radial-gradient(900px 600px at 10% 10%, rgba(6,182,212,.16), transparent 55%),
+                  linear-gradient(180deg, #06080c 0%, #0b0f14 55%, #070a0f 100%);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--max); margin:0 auto; padding:0 22px}
+
+    /* Tesla-ish top nav */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(11,15,20,.55);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      height:64px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      letter-spacing:.08em; text-transform:uppercase;
+      font-weight:600; font-size:12px;
+      color:rgba(255,255,255,.92);
+    }
+    .brand svg{opacity:.95}
+    .nav-links{
+      display:flex; gap:18px; align-items:center;
+      color:rgba(255,255,255,.70);
+      font-size:12.5px; font-weight:500;
+    }
+    .nav-links a{
+      padding:10px 10px;
+      border-radius:999px;
+      transition: background .25s var(--ease), color .25s var(--ease);
+    }
+    .nav-links a:hover{background:rgba(255,255,255,.07); color:rgba(255,255,255,.92)}
+    .nav-cta{
+      display:flex; gap:10px; align-items:center;
+    }
+    .pill{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color:rgba(255,255,255,.92);
+      font-size:12.5px; font-weight:600;
+      transition: transform .15s var(--ease), background .25s var(--ease), border-color .25s var(--ease);
+      cursor:pointer;
+      user-select:none;
+    }
+    .pill:hover{background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.22)}
+    .pill:active{transform: translateY(1px)}
+
+    /* Hero */
+    .hero{
+      position:relative;
+      padding: 64px 0 28px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+    @media (max-width: 960px){
+      .hero-grid{grid-template-columns:1fr; }
+      .nav-links{display:none}
+    }
+
+    .hero-left{
+      padding: 38px 26px;
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(900px 420px at 10% 0%, rgba(124,58,237,.18), transparent 65%),
+        radial-gradient(700px 360px at 90% 30%, rgba(255,255,255,.10), transparent 60%),
+        rgba(255,255,255,.04);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .kicker{
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.70);
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:14px;
+    }
+    .dot{
+      width:7px; height:7px; border-radius:999px;
+      background: rgba(6,182,212,.95);
+      box-shadow: 0 0 0 6px rgba(6,182,212,.12);
+    }
+    h1{
+      margin:0 0 14px;
+      font-size: clamp(34px, 4.2vw, 58px);
+      line-height:1.02;
+      letter-spacing: -.02em;
+      font-weight: 650;
+    }
+    .sub{
+      color: rgba(232,238,246,.78);
+      font-size: 15.5px;
+      line-height: 1.55;
+      max-width: 58ch;
+      margin-bottom: 22px;
+    }
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .btn{
+      border:none;
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-weight: 650;
+      font-size: 13px;
+      cursor:pointer;
+      transition: transform .15s var(--ease), background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+    }
+    .btn.primary{
+      background: rgba(255,255,255,.92);
+      color:#0b0f14;
+    }
+    .btn.primary:hover{ background:#ffffff; transform: translateY(-1px) }
+    .btn.ghost{
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.92);
+      border:1px solid rgba(255,255,255,.16);
+    }
+    .btn.ghost:hover{ background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.24) }
+    .micro{
+      margin-top: 16px;
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+      color: rgba(232,238,246,.62);
+      font-size: 12.5px;
+    }
+    .micro span{
+      display:flex; align-items:center; gap:8px;
+      padding: 8px 10px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+    }
+
+    /* Right card */
+    .hero-right{
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+    .hero-right-top{
+      padding: 22px 22px 10px;
+      display:flex; justify-content:space-between; align-items:flex-start;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background: radial-gradient(700px 240px at 50% -30%, rgba(6,182,212,.18), transparent 60%);
+    }
+    .score{
+      display:flex; flex-direction:column; gap:2px;
+    }
+    .score .label{font-size:12px; color:rgba(255,255,255,.65); letter-spacing:.10em; text-transform:uppercase}
+    .score .value{font-size:30px; font-weight:700; letter-spacing:-.02em}
+    .score .hint{font-size:12px; color:rgba(255,255,255,.62)}
+    .ring{
+      width:64px; height:64px;
+      border-radius:999px;
+      border: 1px solid rgba(255,255,255,.14);
+      display:grid; place-items:center;
+      background: rgba(255,255,255,.04);
+    }
+    .ring svg{opacity:.95}
+    .hero-right-body{padding: 18px 22px 22px}
+    .steps{
+      display:grid;
+      gap:10px;
+    }
+    .step{
+      display:flex; gap:10px; align-items:flex-start;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      transition: border-color .25s var(--ease), background .25s var(--ease);
+    }
+    .step.active{border-color: rgba(6,182,212,.45); background: rgba(6,182,212,.10)}
+    .step .n{
+      width:24px; height:24px; border-radius:999px;
+      display:grid; place-items:center;
+      font-weight:700; font-size:12px;
+      background: rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      flex:0 0 auto;
+    }
+    .step .t{font-weight:650; font-size:13px}
+    .step .d{color:rgba(255,255,255,.62); font-size:12.2px; line-height:1.35; margin-top:2px}
+
+    /* Form shell */
+    .form-shell{
+      padding: 26px 0 70px;
+    }
+
+    /* Section snap (Tesla-like full-bleed panels) */
+    .panel{
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      margin-top: 18px;
+    }
+    .panel-head{
+      padding: 18px 22px;
+      display:flex; justify-content:space-between; align-items:center;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+    }
+    .panel-title{
+      font-weight:700; letter-spacing:-.01em;
+      font-size: 14px;
+      display:flex; align-items:center; gap:10px;
+    }
+    .chip{
+      padding: 6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      font-size:11.5px;
+      color: rgba(255,255,255,.70);
+    }
+    .panel-body{padding: 18px 22px 24px}
+
+    /* Inputs */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .col-12{grid-column: span 12}
+    .col-6{grid-column: span 6}
+    .col-4{grid-column: span 4}
+    @media (max-width: 860px){
+      .col-6,.col-4{grid-column: span 12}
+      .hero-left{padding: 30px 20px}
+    }
+
+    .field{
+      position:relative;
+      background: rgba(0,0,0,.14);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: 14px;
+      padding: 12px 12px 10px;
+      transition: border-color .25s var(--ease), background .25s var(--ease), transform .15s var(--ease);
+    }
+    .field:focus-within{
+      border-color: rgba(124,58,237,.55);
+      background: rgba(6,182,212,.10);
+      transform: translateY(-1px);
+    }
+    label{
+      display:block;
+      font-size:11.5px;
+      color: rgba(255,255,255,.72);
+      margin-bottom: 7px;
+      letter-spacing: .02em;
+    }
+    .req::after{content:" *"; color: var(--bad); font-weight:700}
+    input, textarea, select{
+      width:100%;
+      border:none;
+      outline:none;
+      background: transparent;
+      color: rgba(255,255,255,.92);
+      font-size: 13.5px;
+      font-weight: 500;
+      letter-spacing: .01em;
+    }
+    textarea{min-height: 92px; resize: vertical}
+    ::placeholder{color: rgba(255,255,255,.36)}
+    .hint{
+      margin-top: 8px;
+      font-size: 11.5px;
+      color: rgba(255,255,255,.52);
+      line-height:1.35;
+    }
+
+    .checks{
+      display:flex; flex-wrap:wrap; gap:10px;
+      padding-top: 4px;
+    }
+    .check{
+      display:flex; align-items:center; gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      transition: border-color .25s var(--ease), background .25s var(--ease);
+      user-select:none;
+    }
+    .check:hover{border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.05)}
+    .check input{width:16px; height:16px}
+    .check span{font-size:12.5px; color: rgba(255,255,255,.80); font-weight:550}
+
+    /* Bottom submit bar */
+    .submitbar{
+      position: sticky;
+      bottom: 0;
+      z-index: 30;
+      background: rgba(11,15,20,.70);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .submitbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 14px 0;
+    }
+    .leftmeta{
+      display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+      color: rgba(255,255,255,.65);
+      font-size: 12.5px;
+    }
+    .badge{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      display:flex; align-items:center; gap:8px;
+    }
+    .bar{
+      height: 6px;
+      width: 160px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.10);
+      overflow:hidden;
+    }
+    .bar > div{
+      height:100%;
+      width: 0%;
+      background: rgba(255,255,255,.92);
+      transition: width .35s var(--ease);
+    }
+
+    .toast{
+      position: fixed;
+      right: 18px;
+      bottom: 86px;
+      width: min(420px, calc(100vw - 36px));
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      padding: 14px 14px;
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events:none;
+      transition: opacity .25s var(--ease), transform .25s var(--ease);
+    }
+    .toast.show{
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .toast h4{margin:0 0 4px; font-size: 13.5px}
+    .toast p{margin:0; color: rgba(255,255,255,.70); font-size: 12.5px; line-height:1.35}
+
+    /* subtle background tech graphic */
+    .bg-tech{
+      position:absolute;
+      inset: -140px -80px auto auto;
+      width: 520px; height: 520px;
+      opacity:.55;
+      filter: blur(.2px);
+      pointer-events:none;
+      transform: rotate(10deg);
+    }
+    .bg-tech2{
+      position:absolute;
+      inset: auto auto -220px -120px;
+      width: 620px; height: 620px;
+      opacity:.35;
+      pointer-events:none;
+      transform: rotate(-8deg);
+      filter: blur(.4px);
+    }
+
+
+    /* Vibrant tech strip (replace with Freepik image if licensed) */
+    .hero-left::after{
+      content:"";
+      position:absolute;
+      right:-30px; bottom:-40px;
+      width: 420px; height: 220px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(180px 120px at 30% 30%, rgba(124,58,237,.35), transparent 60%),
+        radial-gradient(200px 140px at 70% 50%, rgba(6,182,212,.28), transparent 62%),
+        radial-gradient(260px 180px at 40% 80%, rgba(249,115,22,.18), transparent 60%),
+        rgba(255,255,255,.04);
+      box-shadow: 0 22px 70px rgba(0,0,0,.45);
+      transform: rotate(-6deg);
+      pointer-events:none;
+      opacity:.9;
+    }
+    /* FREEPIK_PLACEHOLDER:
+       Replace the background above with:
+       background-image: url('YOUR_FREEPIK_IMAGE_URL');
+       background-size: cover; background-position: center;
+    */
+
+
+    /* reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none !important; scroll-behavior:auto !important}
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="Home">
+        <!-- tech mark -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2l3.2 6.4L22 12l-6.8 3.6L12 22l-3.2-6.4L2 12l6.8-3.6L12 2z" stroke="white" stroke-width="1.4" opacity=".95"/>
+          <path d="M12 6.2l1.7 3.4L17.4 12l-3.7 2-1.7 3.4-1.7-3.4-3.7-2 3.7-2.4L12 6.2z" fill="white" opacity=".14"/>
+        </svg>
+        ALIGN TECH • INTAKE
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#basics">Basics</a>
+        <a href="#foundation">Foundation</a>
+        <a href="#visual">Visual</a>
+        <a href="#deliverables">Deliverables</a>
+      </nav>
+
+      <div class="nav-cta">
+        <button class="pill" id="downloadJsonBtn" type="button">Download JSON</button>
+        <button class="pill" id="scrollToFormBtn" type="button">Start</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="top" class="hero">
+    <div class="container hero-grid">
+      <section class="hero-left" aria-label="Intro">
+        <svg class="bg-tech" viewBox="0 0 600 600" fill="none">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#A7C6FF" stop-opacity=".85"/>
+              <stop offset="1" stop-color="#FFFFFF" stop-opacity=".08"/>
+            </linearGradient>
+          </defs>
+          <path d="M88 210c72-126 230-170 334-94 119 87 128 265 22 364-106 99-300 79-380-46-44-69-45-160 24-224z" stroke="url(#g1)" stroke-width="2.2" opacity=".55"/>
+          <path d="M140 260c57-84 165-118 246-66 92 59 103 186 30 265-73 79-214 71-281-18-39-52-40-121 5-181z" stroke="url(#g1)" stroke-width="1.6" opacity=".55"/>
+          <path d="M170 292c36-50 103-70 154-40 58 34 67 110 23 160-44 50-131 48-170-10-23-34-25-78-7-110z" stroke="url(#g1)" stroke-width="1.2" opacity=".55"/>
+          <path d="M305 145v310M185 305h240" stroke="url(#g1)" stroke-width="1.2" opacity=".35"/>
+          <circle cx="305" cy="305" r="12" fill="#A7C6FF" opacity=".25"/>
+        </svg>
+
+        <div class="kicker"><span class="dot"></span> Align Tech • Corporate onboarding</div>
+        <h1>Collect the right inputs once.<br/>Deliver premium identity faster.</h1>
+        <p class="sub">
+          A minimal, executive-grade intake form inspired by premium product sites — designed to reduce revisions,
+          align stakeholders, and capture every corporate identity requirement for graphics, web, and brand work.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn primary" id="heroStartBtn" type="button">Start with Align Tech</button>
+          <a class="btn ghost" href="#deliverables">See deliverables</a>
+        </div>
+
+        <div class="micro" aria-label="Highlights">
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 12l3 3 7-7" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Corporate-ready structure
+          </span>
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2v6m0 8v6M4.9 4.9l4.2 4.2m5.6 5.6 4.2 4.2M2 12h6m8 0h6M4.9 19.1l4.2-4.2m5.6-5.6 4.2-4.2" stroke="white" stroke-width="1.6" opacity=".85" stroke-linecap="round"/></svg>
+            Export to JSON for records
+          </span>
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-4.4 7-11V6l-7-3-7 3v4c0 6.6 7 11 7 11z" stroke="white" stroke-width="1.6" opacity=".9"/></svg>
+            Works with secure email backend
+          </span>
+        </div>
+      </section>
+
+      <aside class="hero-right" aria-label="Progress overview">
+        <div class="hero-right-top">
+          <div class="score">
+            <div class="label">Completion</div>
+            <div class="value"><span id="pct">0</span>%</div>
+            <div class="hint">Live as you fill the form</div>
+          </div>
+          <div class="ring" title="Tech innovation">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2l2.6 5.2L20 10l-5.4 2.8L12 18l-2.6-5.2L4 10l5.4-2.8L12 2z" stroke="white" stroke-width="1.2" opacity=".85"/>
+              <path d="M12 6.6l1.3 2.6L16 10l-2.7 1.4L12 14l-1.3-2.6L8 10l2.7-.8L12 6.6z" fill="white" opacity=".16"/>
+            </svg>
+          </div>
+        </div>
+        <div class="hero-right-body">
+          <div class="steps" id="steps">
+            <div class="step active" data-target="basics">
+              <div class="n">1</div>
+              <div>
+                <div class="t">Basics</div>
+                <div class="d">Company, contacts, project type, timeline.</div>
+              </div>
+            </div>
+            <div class="step" data-target="foundation">
+              <div class="n">2</div>
+              <div>
+                <div class="t">Foundation</div>
+                <div class="d">Mission, audience, UVP, brand personality.</div>
+              </div>
+            </div>
+            <div class="step" data-target="visual">
+              <div class="n">3</div>
+              <div>
+                <div class="t">Visual direction</div>
+                <div class="d">Colors, typography, references, constraints.</div>
+              </div>
+            </div>
+            <div class="step" data-target="deliverables">
+              <div class="n">4</div>
+              <div>
+                <div class="t">Deliverables</div>
+                <div class="d">What to produce + budget + approvals.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- INFOGRAPHICS -->
+  <section class="container" style="padding: 0 22px 18px;">
+    <div class="panel" style="margin-top: 0;">
+      <div class="panel-head">
+        <div class="panel-title"><span class="chip">Why this intake matters</span></div>
+        <span class="chip">Align Tech method</span>
+      </div>
+      <div class="panel-body">
+        <div class="grid">
+          <div class="col-4">
+            <div class="step" style="height:100%; align-items:center;">
+              <div class="ring" style="width:44px;height:44px;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke="white" stroke-width="1.4" opacity=".9"/>
+                  <path d="M9.5 12l1.8 1.8L15.8 9.3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <div class="t">Governance</div>
+                <div class="d">Capture approvals, constraints, and mandatory wording early.</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="step" style="height:100%; align-items:center;">
+              <div class="ring" style="width:44px;height:44px;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 7h16M7 4v16M4 17h16" stroke="white" stroke-width="1.4" opacity=".9" stroke-linecap="round"/>
+                  <path d="M10 10h10v8H10z" stroke="white" stroke-width="1.4" opacity=".9"/>
+                </svg>
+              </div>
+              <div>
+                <div class="t">Consistency</div>
+                <div class="d">One source of truth for web + print + social assets.</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="step" style="height:100%; align-items:center;">
+              <div class="ring" style="width:44px;height:44px;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2v10" stroke="white" stroke-width="1.6" opacity=".9" stroke-linecap="round"/>
+                  <path d="M8 12l4 4 8-8" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M4 22h16" stroke="white" stroke-width="1.4" opacity=".75" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div>
+                <div class="t">Speed</div>
+                <div class="d">Fewer revisions → faster approvals → faster delivery.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hint" style="margin-top:12px">
+          <b>Freepik imagery (optional):</b> This template includes safe, original SVG graphics. If you want Freepik images,
+          download them with the proper license/attribution and replace the placeholders in <code>index.html</code> (search for <code>FREEPIK_PLACEHOLDER</code>).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+
+  <section class="form-shell">
+    <div class="container">
+      <form id="intakeForm" novalidate>
+        <!-- BASICS -->
+        <div class="panel" id="basics">
+          <div class="panel-head">
+            <div class="panel-title">
+              <span class="chip">01</span> Client & Project Basics
+            </div>
+            <span class="chip">Corporate onboarding</span>
+          </div>
+          <div class="panel-body">
+            <div class="grid">
+              <div class="col-6">
+                <div class="field">
+                  <label class="req">Company / Organization Name</label>
+                  <input name="company_name" placeholder="e.g. Acme Standards Ltd" required>
+                  <div class="hint">Official registered name if available.</div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="field">
+                  <label class="req">Contact Person + Title</label>
+                  <input name="contact_person" placeholder="e.g. Jane Doe, Marketing Manager" required>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="field">
+                  <label class="req">Email(s)</label>
+                  <input type="email" name="emails" placeholder="e.g. ceo@company.com, marketing@company.com" required>
+                  <div class="hint">Multiple emails allowed (comma-separated).</div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="field">
+                  <label>Phone / WhatsApp</label>
+                  <input name="phone" placeholder="e.g. +256 780 000 000">
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="field">
+                  <label>Physical Address</label>
+                  <input name="address" placeholder="e.g. Modern Times Building, Kira, Wakiso, Uganda">
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="field">
+                  <label>Industry / Sector</label>
+                  <input name="industry" placeholder="e.g. Finance, Manufacturing, NGO, Government">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="field">
+                  <label class="req">Project Type</label>
+                  <input name="project_type" placeholder="e.g. Corporate identity + Website" required>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="field">
+                  <label>Deadline / Key Dates</label>
+                  <input name="deadline" placeholder="e.g. Concept by 10th, final by 20th">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="field">
+                  <label>Decision Maker(s)</label>
+                  <input name="decision_makers" placeholder="Names / titles">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOUNDATION -->
+        <div class="panel" id="foundation">
+          <div class="panel-head">
+            <div class="panel-title">
+              <span class="chip">02</span> Brand Foundation
+            </div>
+            <span class="chip">Strategy → visual decisions</span>
+          </div>
+          <div class="panel-body">
+            <div class="grid">
+              <div class="col-12">
+                <div class="field">
+                  <label class="req">One-line description of the business</label>
+                  <textarea name="one_line" placeholder="Describe what you do in one sentence." required></textarea>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="field">
+                  <label>Mission</label>
+                  <textarea name="mission" placeholder="Why do you exist?"></textarea>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="field">
+                  <label>Vision</label>
+                  <textarea name="vision" placeholder="Where are you going?"></textarea>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="field">
+                  <label>Core values (3–6)</label>
+                  <textarea name="values" placeholder="Comma-separated or bullets"></textarea>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="field">
+                  <label class="req">Primary target audience</label>
+                  <textarea name="audience" placeholder="Who do you serve? Roles, sector, location." required></textarea>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="field">
+                  <label>Top 3 competitors</label>
+                  <textarea name="competitors" placeholder="List competitors or alternatives"></textarea>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="field">
+                  <label class="req">Unique value proposition (UVP)</label>
+                  <textarea name="uvp" placeholder="What makes you different?" required></textarea>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="field">
+                  <label>Brand personality (pick 3–5)</label>
+                  <div class="checks" role="group" aria-label="Brand personality">
+                    <label class="check"><input type="checkbox" name="personality[]" value="Modern"><span>Modern</span></label>
+                    <label class="check"><input type="checkbox" name="personality[]" value="Corporate"><span>Corporate</span></label>
+                    <label class="check"><input type="checkbox" name="personality[]" value="Technical"><span>Technical</span></label>
+                    <label class="check"><input type="checkbox" name="personality[]" value="Premium"><span>Premium</span></label>
+                    <label class="check"><input type="checkbox" name="personality[]" value="Innovative"><span>Innovative</span></label>
+                    <label class="check"><input type="checkbox" name="personality[]" value="Minimal"><span>Minimal</span></label>
+                    <label class="check"><input type="checkbox" name="personality[]" value="Bold"><span>Bold</span></label>
+                    <label class="check"><input type="checkbox" name="personality[]" value="Friendly"><span>Friendly</span></label>
+                    <label class="check"><input type="checkbox" name="personality[]" value="Trustworthy"><span>Trustworthy</span></label>
+                  </div>
+                  <div class="hint">These traits guide typography, spacing, imagery, and tone.</div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="field">
+                  <label>Tone of voice</label>
+                  <input name="tone" placeholder="Formal / Friendly / Authoritative / Technical / Inspirational">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VISUAL -->
+        <div class="panel" id="visual">
+          <div class="panel-head">
+            <div class="panel-title">
+              <span class="chip">03</span> Visual Direction
+            </div>
+            <span class="chip">Look & feel constraints</span>
+          </div>
+          <div class="panel-body">
+            <svg class="bg-tech2" viewBox="0 0 600 600" fill="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="g2" x1="1" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#FFFFFF" stop-opacity=".10"/>
+                  <stop offset="1" stop-color="#A7C6FF" stop-opacity=".35"/>
+                </linearGradient>
+              </defs>
+              <path d="M120 420c96 120 290 145 406 43 116-102 98-296-33-388-131-92-315-48-403 95-47 78-46 173 30 250z" stroke="url(#g2)" stroke-width="2.2" opacity=".45"/>
+              <path d="M175 395c76 78 212 88 294 16 82-72 70-202-22-262-92-60-219-32-279 63-34 55-33 122 7 183z" stroke="url(#g2)" stroke-width="1.6" opacity=".45"/>
+              <circle cx="300" cy="300" r="9" fill="#fff" opacity=".12"/>
+              <path d="M300 160v280M160 300h280" stroke="url(#g2)" stroke-width="1.2" opacity=".22"/>
+            </svg>
+
+            <div class="grid">
+              <div class="col-6">
+                <div class="field">
+                  <label>Existing logo link (Drive/Dropbox/Website)</label>
+                  <input name="existing_logo_link" placeholder="Paste a link to current logo files">
+                  <div class="hint">If none, leave blank.</div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="field">
+                  <label>Preferred colors</label>
+                  <input name="preferred_colors" placeholder="e.g. Navy + Gold, or hex codes">
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="field">
+                  <label>Colors to avoid</label>
+                  <input name="colors_avoid" placeholder="e.g. Bright red, neon colors">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="field">
+                  <label>Typography preference</label>
+                  <input name="typography" placeholder="e.g. Clean modern sans-serif">
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="field">
+                  <label>Brands you admire (and why)</label>
+                  <textarea name="admire_brands" placeholder="List brands + what exactly you like (layout, tone, simplicity, colors, etc.)"></textarea>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="field">
+                  <label>What should the design NOT look like?</label>
+                  <textarea name="avoid_looks" placeholder="e.g. Too playful, too many colors, cluttered layouts"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DELIVERABLES -->
+        <div class="panel" id="deliverables">
+          <div class="panel-head">
+            <div class="panel-title">
+              <span class="chip">04</span> Deliverables & Governance
+            </div>
+            <span class="chip">Scope control</span>
+          </div>
+          <div class="panel-body">
+            <div class="grid">
+              <div class="col-12">
+                <div class="field">
+                  <label>Deliverables (select all that apply)</label>
+                  <div class="checks" role="group" aria-label="Deliverables">
+                    <label class="check"><input type="checkbox" name="deliverables[]" value="Logo suite"><span>Logo suite</span></label>
+                    <label class="check"><input type="checkbox" name="deliverables[]" value="Brand guidelines (PDF)"><span>Brand guidelines (PDF)</span></label>
+                    <label class="check"><input type="checkbox" name="deliverables[]" value="Website"><span>Website</span></label>
+                    <label class="check"><input type="checkbox" name="deliverables[]" value="Company profile / brochure"><span>Company profile / brochure</span></label>
+                    <label class="check"><input type="checkbox" name="deliverables[]" value="Presentation template"><span>Presentation template</span></label>
+                    <label class="check"><input type="checkbox" name="deliverables[]" value="Social media templates"><span>Social media templates</span></label>
+                    <label class="check"><input type="checkbox" name="deliverables[]" value="Business cards"><span>Business cards</span></label>
+                    <label class="check"><input type="checkbox" name="deliverables[]" value="Letterhead"><span>Letterhead</span></label>
+                    <label class="check"><input type="checkbox" name="deliverables[]" value="Email signature"><span>Email signature</span></label>
+                    <label class="check"><input type="checkbox" name="deliverables[]" value="UI kit (apps/dashboards)"><span>UI kit</span></label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="field">
+                  <label>Scope notes / extra requirements</label>
+                  <textarea name="scope_notes" placeholder="Anything special: compliance wording, format constraints, brand approvals, etc."></textarea>
+                  <div class="hint">Corporate tip: capture mandatory wording early to avoid rework.</div>
+                </div>
+              </div>
+
+              <div class="col-4">
+                <div class="field">
+                  <label>Budget range</label>
+                  <input name="budget" placeholder="e.g. 2M–5M UGX">
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="field">
+                  <label>Revisions included</label>
+                  <input name="revisions" placeholder="e.g. 2 rounds">
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="field">
+                  <label>Preferred feedback channel</label>
+                  <input name="feedback_channel" placeholder="Email / WhatsApp / Meetings">
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="field">
+                  <label>Approvals</label>
+                  <textarea name="approvals" placeholder="Who approves concept? Who approves final? Any committees?"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="hint" style="margin-top:14px">
+              <b>Submission note:</b> On GitHub Pages (static), email sending needs a service (Formspree/EmailJS) or your own backend.
+              This demo supports both — set your endpoint in the script below.
+            </div>
+          </div>
+        </div>
+
+        <!-- hidden honeypot (spam) -->
+        <input type="text" name="company_website" style="display:none" tabindex="-1" autocomplete="off">
+
+      </form>
+    </div>
+  </section>
+
+  <!-- SUBMIT BAR -->
+  <div class="submitbar">
+    <div class="container submitbar-inner">
+      <div class="leftmeta">
+        <span class="badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2v6m0 8v6M4 12h6m8 0h6" stroke="white" stroke-width="1.6" opacity=".85" stroke-linecap="round"/></svg>
+          Designed for corporate clients
+        </span>
+        <span class="badge">
+          <span id="requiredCount">0</span>/<span id="requiredTotal">0</span> required complete
+        </span>
+        <span class="badge">
+          <div class="bar" aria-hidden="true"><div id="barFill"></div></div>
+        </span>
+      </div>
+
+      <div style="display:flex; gap:10px; align-items:center">
+        <button class="btn ghost" id="resetBtn" type="button">Reset</button>
+        <button class="btn primary" id="submitBtn" type="button">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <h4 id="toastTitle">Saved</h4>
+    <p id="toastMsg">Your progress is stored locally in this browser.</p>
+  </div>
+
+  <script>
+    /****************************************************************
+     * GitHub-ready demo: UI works fully on GitHub Pages.
+     * Email sending requires ONE of:
+     *  (A) Your backend endpoint (Laravel): set SUBMIT_ENDPOINT="/api/intake"
+     *  (B) Formspree endpoint: set SUBMIT_ENDPOINT="https://formspree.io/f/xxxxxxx"
+     *  (C) EmailJS: client-side email (requires keys) - not included by default
+     ****************************************************************/
+
+    // ✅ CHANGE THIS for real submissions:
+    const SUBMIT_ENDPOINT = ""; // e.g. "/api/intake" OR "https://formspree.io/f/XXXXXXX"
+    const SEND_TO_EMAIL = "iyundhue@gmail.com"; // intended recipient for backend mailer
+    const STORAGE_KEY = "ci_intake_v2";
+
+    const form = document.getElementById("intakeForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const pctEl = document.getElementById("pct");
+    const barFill = document.getElementById("barFill");
+    const reqCountEl = document.getElementById("requiredCount");
+    const reqTotalEl = document.getElementById("requiredTotal");
+    const toast = document.getElementById("toast");
+    const toastTitle = document.getElementById("toastTitle");
+    const toastMsg = document.getElementById("toastMsg");
+
+    const scrollToFormBtn = document.getElementById("scrollToFormBtn");
+    const heroStartBtn = document.getElementById("heroStartBtn");
+    const downloadJsonBtn = document.getElementById("downloadJsonBtn");
+
+    const steps = Array.from(document.querySelectorAll(".step"));
+    const sections = ["basics", "foundation", "visual", "deliverables"].map(id => document.getElementById(id));
+
+    function showToast(title, msg){
+      toastTitle.textContent = title;
+      toastMsg.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => toast.classList.remove("show"), 2600);
+    }
+
+    function formToJson(){
+      const fd = new FormData(form);
+      const obj = {};
+      for (const [k,v] of fd.entries()){
+        if (k === "company_website") continue; // honeypot
+        if (k.endsWith("[]")){
+          const kk = k.slice(0,-2);
+          obj[kk] = obj[kk] || [];
+          obj[kk].push(v);
+        } else {
+          obj[k] = v;
+        }
+      }
+      obj.__meta = {
+        submitted_to: SEND_TO_EMAIL,
+        created_at: new Date().toISOString(),
+        user_agent: navigator.userAgent
+      };
+      return obj;
+    }
+
+    function saveLocal(silent=false){
+      const data = formToJson();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      if (!silent) showToast("Saved locally", "Your progress is stored in this browser.");
+    }
+
+    function loadLocal(){
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      try{
+        const data = JSON.parse(raw);
+        for (const [k,v] of Object.entries(data)){
+          if (k === "__meta") continue;
+          if (Array.isArray(v)){
+            const inputs = form.querySelectorAll(`input[name="${k}[]"]`);
+            inputs.forEach(i => i.checked = v.includes(i.value));
+          } else {
+            const el = form.querySelector(`[name="${k}"]`);
+            if (el) el.value = v;
+          }
+        }
+        showToast("Restored", "We restored your saved progress.");
+      }catch(e){/* ignore */}
+    }
+
+    function calcCompletion(){
+      const required = Array.from(form.querySelectorAll("[required]"));
+      const total = required.length;
+      let done = 0;
+      required.forEach(el => {
+        if (el.type === "checkbox" || el.type === "radio") {
+          if (el.checked) done++;
+        } else if ((el.value || "").trim().length > 0) {
+          done++;
+        }
+      });
+      const pct = total === 0 ? 0 : Math.round((done/total) * 100);
+      pctEl.textContent = pct;
+      barFill.style.width = pct + "%";
+      reqCountEl.textContent = done;
+      reqTotalEl.textContent = total;
+      return {done,total,pct};
+    }
+
+    function validateRequired(){
+      // minimal UX: highlight empty required fields on submit
+      let ok = true;
+      const required = Array.from(form.querySelectorAll("[required]"));
+      required.forEach(el => {
+        const filled = (el.value || "").trim().length > 0;
+        const field = el.closest(".field");
+        if (!filled){
+          ok = false;
+          if (field) field.style.borderColor = "rgba(239,68,68,.55)";
+        } else {
+          if (field) field.style.borderColor = "rgba(255,255,255,.10)";
+        }
+      });
+      return ok;
+    }
+
+    function downloadJSON(){
+      const data = formToJson();
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type:"application/json"});
+      const a = document.createElement("a");
+      const ref = "CI-" + new Date().toISOString().slice(0,10).replaceAll("-","") + "-" + Math.random().toString(16).slice(2,8).toUpperCase();
+      a.href = URL.createObjectURL(blob);
+      a.download = ref + ".json";
+      a.click();
+      URL.revokeObjectURL(a.href);
+      showToast("Downloaded", "JSON saved to your device.");
+    }
+
+    async function submit(){
+      // spam honeypot
+      const hp = form.querySelector('[name="company_website"]');
+      if (hp && hp.value) return; // silently drop spam
+
+      const v = calcCompletion();
+      if (!validateRequired()){
+        showToast("Missing required fields", "Please complete the required fields before submitting.");
+        return;
+      }
+
+      const payload = formToJson();
+
+      // If no endpoint, demo-mode: download JSON and show success
+      if (!SUBMIT_ENDPOINT){
+        downloadJSON();
+        showToast("Demo mode", "No server endpoint set. We downloaded your JSON instead.");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting…";
+
+      try{
+        const res = await fetch(SUBMIT_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type":"application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) throw new Error("Submission failed. Check endpoint configuration.");
+        localStorage.removeItem(STORAGE_KEY);
+        showToast("Submitted", "Submission sent successfully.");
+        form.reset();
+        calcCompletion();
+      }catch(err){
+        showToast("Error", err.message);
+      }finally{
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit";
+      }
+    }
+
+    // Smooth scroll to form
+    function goTo(id){
+      document.getElementById(id).scrollIntoView({behavior:"smooth", block:"start"});
+    }
+    scrollToFormBtn.addEventListener("click", () => goTo("basics"));
+    heroStartBtn.addEventListener("click", () => goTo("basics"));
+    downloadJsonBtn.addEventListener("click", downloadJSON);
+
+    // Clickable steps
+    steps.forEach(s => s.addEventListener("click", () => goTo(s.dataset.target)));
+
+    // Observe sections to mark active step
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting){
+          steps.forEach(x => x.classList.toggle("active", x.dataset.target === e.target.id));
+        }
+      });
+    }, {threshold: 0.42});
+    sections.forEach(sec => obs.observe(sec));
+
+    // Live updates + autosave
+    let saveTimer;
+    form.addEventListener("input", () => {
+      calcCompletion();
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => saveLocal(true), 500);
+    });
+
+    // Buttons
+    submitBtn.addEventListener("click", submit);
+    resetBtn.addEventListener("click", () => {
+      form.reset();
+      localStorage.removeItem(STORAGE_KEY);
+      calcCompletion();
+      showToast("Reset", "Form cleared and local progress removed.");
+    });
+
+    // Initial load
+    loadLocal();
+    calcCompletion();
+
+    // Nice: save on leaving
+    window.addEventListener("beforeunload", () => saveLocal(true));
+  </script>
+
+  <footer style="border-top:1px solid rgba(255,255,255,.08); background: rgba(11,15,20,.55); backdrop-filter: blur(14px);">
+    <div class="container" style="padding: 22px 22px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;">
+      <div style="color: rgba(232,238,246,.70); font-size: 12.5px;">
+        <span style="font-weight:650; color: rgba(255,255,255,.92); letter-spacing:.06em; text-transform:uppercase;">Align Tech</span>
+        <span style="margin:0 10px; opacity:.35;">•</span>
+        Corporate Identity Intake for branding, graphics & web projects
+      </div>
+      <div style="color: rgba(232,238,246,.62); font-size: 12.5px;">
+        Developed by <b style="color: rgba(255,255,255,.90);">Iyundhu Edwin Japheth</b>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
